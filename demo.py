@@ -11,12 +11,15 @@ from pydantic_ai import Agent, RunContext, UsageLimits
 from loguru import logger
 
 import sys
+# import os
+# from pydantic_ai.providers.openai import OpenAIProvider
+# from pydantic_ai.models.openai import OpenAIChatModel
+# from openai import AsyncOpenAI
+
+from pydantic_ai.providers.google import GoogleProvider
+from pydantic_ai.models.google import GoogleModel
+
 import os
-from pydantic_ai.providers.openai import OpenAIProvider
-from pydantic_ai.models.openai import OpenAIChatModel
-from openai import AsyncOpenAI
-
-
 # ---------------- Logger setup ----------------
 
 logger.remove()
@@ -44,14 +47,40 @@ logger.info("Starting the application...")
 # llm = OpenAIProvider(openai_client=async_client)
 
 # model = OpenAIChatModel("gpt-4o-mini", provider=llm)
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# client = AsyncOpenAI(
+#     api_key="your_api_key_here"  # Replace with your actual API key
+# )
 
-provider = OpenAIProvider(openai_client=client)
 
-model = OpenAIChatModel(
-    model_name="gpt-4o-mini",  # cheaper + fast
+# # print(os.getenv("OPENAI_API_KEY"))
+
+# provider = OpenAIProvider(openai_client=client)
+
+# model = OpenAIChatModel(
+#     model_name="gpt-5.2",  # cheaper + fast
+#     provider=provider
+# )
+
+# client = AsyncOpenAI(
+#     api_key="your api key here"  # hackathon mode
+# )
+
+# provider = OpenAIProvider(openai_client=client)
+
+# model = OpenAIChatModel(
+#     model_name="gpt-4o-mini",
+#     provider=provider
+# )
+GEMINI_API_KEY = "your_api_key_here"  # Replace with your actual API key
+
+provider = GoogleProvider(api_key=GEMINI_API_KEY)
+
+model = GoogleModel(
+    "gemini-2.5-flash",
     provider=provider
 )
+
+
 
 # ---------------- HuggingFace setup ----------------
 
@@ -64,8 +93,11 @@ joke_selection_agent = Agent(
     model,
 
     system_prompt=(
-        "Use the `joke_factory` to generate some jokes, at least 3, then select the best one. ",
-        "You must return just a single joke."
+        "Use the `joke_factory` to generate some jokes, at least 5, then select the best one. ",
+        #  "Criteria to select one best joke include: dark humor, wordplay, clean humor, sarcasm, or absurdity. "
+        # "You must return just a single joke."
+        # "Generate 10 jokes. Score them by creativity and wordplay. "
+    "Return only the best one."
     ),
 )
 
@@ -73,11 +105,7 @@ logger.info("Joke selection agent initialized")
 
 # ---------------- Joke generation agent ----------------
 
-joke_generation_agent = Agent(
-    model,
-    output_type=list[str]
 
-)
 
 logger.info("Joke generation agent initialized")
 
@@ -104,7 +132,7 @@ async def joke_factory(
 
             request_limit=5,
 
-            total_tokens_limit=500
+            total_tokens_limit=1000
 
         ),
 
@@ -134,7 +162,7 @@ result = joke_selection_agent.run_sync("Tell me the joke",
 
         request_limit=5,
 
-        total_tokens_limit=700
+        total_tokens_limit=1000
 
     )
 
