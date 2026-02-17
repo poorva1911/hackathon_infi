@@ -1,0 +1,853 @@
+ID,Bug Line,Explanation
+16,1,"Bug Detected at Line 1
+
+Incorrect Statement:
+rdi.smartVec().vecEditMode(TA::VECD);
+
+Correct Statement:
+rdi.smartVec().vecEditMode(TA::VTT);
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+rdi.smartVec().vecEditMode()
+Specifies a mode for editing vectors at runtime: VECD or VTT.
+SmartRDI supports two modes for vector editing at runtime: VECD firmware command
+and VEC_TRANSFER_TASK (VTT) API. Generally, you can select either VECD or VTT for
+the VEC_EDIT_MODE keyword in the SmartRDI: RDI_Configure file for editing all the
+vectors.
+This function allows you to select one mode for one pattern while another mode for
+another pattern in the code level. See the Example 1.
+When rdi.smartVec(
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+32,2,"Bug Detected at Line 2
+
+Incorrect Statement:
+rdi.port(""pt1"").dc().pin(""dig2"").vForce(1 uA).burst();
+
+Correct Statement:
+rdi.port(""pt1"").dc().pin(""dig"").vForce(1 V).execute();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Example
+Related information
+PPMU_PIN_MEASURE
+Functional changes
+Introduced in SmartRDI 2.1.0
+rdi.burstDcId()
+Specifies an ID and a pin name. In the subsequent executions, the ID can be directly
+used by getBurstValue() for the pin. With this function, you do not have to use an ID on
+a dc() command.
+Syntax
+List of parameters
+Parameter Description
+sID A burst ID.
+sPin A pin name.
+Example
+Code example without burstDcId():
+11  ON_FIRST_INVOCATION_BEGINON_FIRST_INVOCATION_BEGIN();();
+22    RDI_BEGIN  
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+25,1,"Bug Detected at Line 1
+
+Incorrect Statement:
+ARRAY_I write_data(2); // Define a variable for a dual-site test
+
+Correct Statement:
+ARRAY_I write_data(2);
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+).exex
+1313    
+1414      RDI_END    RDI_END();();
+1515    
+1616  ON_FIRST_INVOCATION_ENDON_FIRST_INVOCATION_END();();
+11  ARRAY_I write_dataARRAY_I write_data((22););  // Define a variable for dual-site test// Define a variable for dual-site test
+22  write_datawrite_data..initinit((00););
+33    
+44  write_datawrite_data[[00]=]=0x10x1;;
+55  write_datawrite_data[[11]=]=0x20x2;;
+66    
+77  rdirdi..runTimeValrunTimeVal((""data""""data"",,write_datawrite_data););  // Site data array// Site data array
+88
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+10,2,"Bug Detected at Line 2
+
+Incorrect Statement:
+rdi.pmux(4).module(""02"").readHumanSeniority().execute();
+
+Correct Statement:
+rdi.pmux(4).module(""02"").readHumSensor().execute();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+APIs rdi.pmux().mux() and rdi.pmux().readMux() are to be use to select a multiplexer
+and to read the status from the hardware. API rdi.id().getPmuxState() has then to be
+used to retrieve the read status for evaluating in a test method.
+Syntax
+Parameter Description
+sPin The number of card and the multiplexer.
+The format of the string is ""ccmm"":
+cc = Card (""01"" to ""16"" or ""FF"")
+mm = Multiplexer (01 ... 12)
+Multiple multiplexers, separated by a comma "","", can be defined.
+Return Value
+A reference to
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+26,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+rdi.dc().pin(""Pin1"").vForce().waveform(wav1)
+
+Correct Statement:
+ rdi.dc().pin(""Pin1"").vForce().waveform(wav1)
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+rdi.dc().viMeas() supports waveform sourcing and sampling on the same pin at the same
+time.
+Related information
+rdi.id().getWaveform()
+Functional changes
+SmartRDI 7.6.1: viMeas() supports waveform sourcing and sampling on the same
+pin.
+SmartRDI 7.6.4: Waveform sourcing, sampling, and measurement wait on a single
+pin simultaneously.
+Forcing waveform on a pin and sampling on
+another pin
+Since 2.4.4, SmartRDI supports DCS waveform() ans samples() in the same
+execute().
+RDI_BEGIN();
+  rdi.dc(""id1"").
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+23,25,"Bug Detected at Line 25
+
+Incorrect Statement:
+rdi.burstUpload.smartVec().end();
+
+Correct Statement:
+rdi.smartVec().burstUpload().end();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+).executeexecute();();
+1111      rdi    rdi..smartVecsmartVec((id4id4).).pinpin((""DATA4""""DATA4"").).readDatareadData((88,,1212).).executeexecute();();
+1212    rdi  rdi..smartVecsmartVec().().burstUploadburstUpload().().endend();();
+1313  RDI_ENDRDI_END();();
+1414    
+1515  ON_FIRST_INVOCATION_ENDON_FIRST_INVOCATION_END();();
+1616    
+1717  ARRAY_I bitResultARRAY_I bitResult==rdirdi..idid((""id""""id"").).getReadBitgetReadBit((""DATA2""""DATA2""););
+1818  ARRAY_LL dataResultARRAY_LL dataResult==rdirdi..id
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+4,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(31 V).vForceRange(30 V).iForceRange(50 mA).iClamp(50 mA, -50 mA)
+
+Correct Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(31 V).vForceRange(30 V).iForceRange(50 mA).iClamp(-50 mA, 50 mA)
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Sense only connection (open force), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 300
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force only connection (open sense), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 100
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force will drive to iClamp.
+
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+31,2,"Bug Detected at Line 2
+
+Incorrect Statement:
+vec_port1.burst();
+
+Correct Statement:
+vec_port1.clear();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+).executeexecute()()
+1616      rdi    rdi..waitwait((11 ms ms););
+1717      rdi    rdi..smartVecsmartVec().().pinpin((""DATA7""""DATA7"").).writeDatawriteData((0x540x54,,88,,44).).repeatrepeat((44).).execuexecu
+1818    rdi  rdi..smartVecsmartVec().().burstLabelburstLabel().().endend();();
+1919  RDI_ENDRDI_END();();
+2020    
+2121  // Allow to get the Pass-Fail result with burstLabel() in SmartRDI // Allow to get the Pass-Fail result with burstLabel() in SmartRDI 
+2222  RDI_BEGINRDI_BEGIN();();
+2323  
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+17,8,"Bug Detected at Line 8
+
+Incorrect Statement:
+int iffv = rdi.id(""a"").getFFC();
+
+Correct Statement:
+int iffv = rdi.id(""a"").getFFV();
+
+Bug Category:
+Assignment in Condition
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The condition uses '=' instead of '=='. This performs assignment instead of comparison, which changes the variable value and always evaluates to true if non-zero.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Related information
+rdi.emap().FFV()
+Functional changes
+Introduced in SmartRDI 7.5.3
+rdi.id().getMultiFFC()
+Retrieves the number of failing cycles specified by multiFCC().
+Syntax
+List of parameters
+Parameter Description
+pin The pin for which to retrieve the number of failing cycles.
+Example
+Related information
+rdi.smartVec().multiFFC()
+rdi.id().getFFC()
+11  RDI_BEGINRDI_BEGIN();();
+22    rdi  rdi..emapemap((""a""""a"").).labellabel((""label2""""label2"").).pinpin((""pB""""pB""))
+33                          
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+27,2,"Bug Detected at Line 2
+
+Incorrect Statement:
+rdi.dc().pin(""DPS_1,DPS_2"").imeasRange(100 uA);
+
+Correct Statement:
+rdi.dc().pin(""DPS_1,DPS_2"").iMeasRange(100 uA);
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+rdi.dc().connect()
+Connects a DPS pin. Supported DPS pins are MS-DPS, GP-DPS and the DC Scale pins in
+the DPS operating mode.
+The function can be used only in the code‑based mode.
+Note  DC Scale pins must be configured for the DPS operating mode in the DPS
+Pins editor. This function is not supported for the PMU operating mode of DC Scale
+pins.
+Syntax
+List of parameters
+There are no parameters.
+Return Value
+A reference to the dcBase object.
+Example
+Functional changes
+Introduced in SmartRDI 2.1.0
+
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+24,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+rdi.digCap(""cap"").pin(""D0"").samples(100).initDiscard(10).interS;
+
+Correct Statement:
+rdi.digCap(""cap"").pin(""DO"").samples(100).initDiscard(10).interS
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Related information
+SmartRDI: Digital capture test setup
+Functional changes
+Introduced in SmartRDI 2.3.0
+rdi.digCap().capMode()
+Specifies the digital capture mode.
+If one pin is specified in the pin() function, the default mode is serial mode.
+If multiple pins are specified in the pin() function, the default mode is parallel mode.
+In this mode, 32 bits at most can be captured. The pin order is MSB to LSB.
+Syntax
+List of parameters
+Parameter Description
+mode The digital capture mode.
+List of avai
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+14,7,"Bug Detected at Line 7
+
+Incorrect Statement:
+double dVal = rdi.id(""a"").getAlarmValue();
+
+Correct Statement:
+double dVal = rdi.id(""a"").getAlarmValue(""AVI"");
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+().executeexecute();();
+44    
+55  RDI_ENDRDI_END();();
+66    
+77  doubledouble dVal2  dVal2 == rdi rdi..idid((22).).getValuegetValue();();
+rdi.id().getValue()
+Retrieves the measured value for a pin.
+Syntax
+List of parameters
+Parameter Description
+sPin The pin for which the result is to be retrieved.
+Example
+Related information
+rdi.id().getMultiValue()
+Functional changes
+Introduced in SmartRDI 2.1.0
+SmartRDI 2.3.0: Adds a new function getMultiValue().
+Setting up DC Scale pins with SmartRDI
+Smart
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+9,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+rdi.cogo().end().end();
+
+Correct Statement:
+rdi.cogo().node().end();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+RDI_BEGIN() and RDI_END() are intended to be used in the ON_FIRST_INVOCATION
+block and must always be implemented together.
+The burst pattern and the analog set are generated, the tests in the block are executed
+and the raw test results are retrieved when RDI_END() is executed.
+Syntax
+Parameter
+Parameter Description
+mode The optional execution mode. If mode is not specified, the blocking pattern execution is used by
+default.
+TA::BLOCKING is to be used to start the blocking pattern execution at t
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+13,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+rdi.id(""cap"").getVesjkctor();
+
+Correct Statement:
+rdi.id(""cap"").getVector();
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+rdi.id().getVecVar()
+Retrieves the vector variable name created for the digital capture pin.
+Syntax
+List of parameters
+Parameter Description
+pin The pin to query.
+Example
+Functional changes
+Introduced in SmartRDI 2.1.0
+string rdi.id().getVecVar(const string& pin);
+rdi.id(""dc_hidden_4pins"").getVecVar(""DATA2"");
+rdi.id().getFailCount()
+Returns fail count.
+Syntax
+List of parameters
+Parameter Description
+pin Specifies a pin for which to get the fail count.
+Return value
+The return value is an integer 
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+22,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+    .module(""02"").readTempThresh(70)
+
+Correct Statement:
+    .module(""02"").readTempThresh()
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+getTempThresh()
+The member function retrieves the programmed temperature threshold from the
+software cache.
+Function readTempThresh() must be called upfront for the reading the programmed
+threshold from the hardware into the software cache.
+Syntax
+List of parameters
+Parameter Description
+module Sensor module name.
+Return value
+The return value is an integer indicating the programmed temperature threshold.
+Example
+See also the Set and read thresholds, read actual values example in Accessing PMUX
+
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+29,6,"Bug Detected at Line 6
+
+Incorrect Statement:
+rdi.route().retrievePmuxPinStatus(""P0x08F1"");
+
+Correct Statement:
+// Result on site 1 is {0}
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Related information
+Utility lines
+MUX cards
+Functional changes
+Introduced in SmartRDI 2.5.0
+rdi.route().retrievePmuxPinStatus()
+Retrieves the status of a pmux switch in both online mode and offline mode.
+Syntax
+List of parameters
+Parameter Description
+pin The pin name that has been defined in the routing setup file.
+For a link pin, the result sequence is the same as the pins sequence in the routing setup file.
+Example
+11  RDI_INITRDI_INIT();();
+22  ......
+33  ......
+44  ON_FIRST_INVOCATION_BEGIN
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+2,3,"Bug Detected at Line 3
+
+Incorrect Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(13.5 V).vForceRange(35 V).iForceRange(50 mA).iClamp(-50 mA, 50 mA)
+
+Correct Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(13.5 V).vForceRange(30 V).iForceRange(50 mA).iClamp(-50 mA, 50 mA)
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Sense only connection (open force), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 300
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force only connection (open sense), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 100
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force will drive to iClamp.
+
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+20,1,"Bug Detected at Line 1
+
+Incorrect Statement:
+rdi.digCapBurstSiteUpload(false);
+
+Correct Statement:
+rdi.digCapBurstSiteUpload(true);
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+rdi.digCapBurstSiteUpload()
+Provides a local control over the ""burst site upload"" capacity for digital capture results.
+Syntax
+List of parameters
+Parameter Description
+digCapBurstSiteUpload Whether to use burst site upload for the following digital capture test. It can be true or
+false. The default value is false.
+If it is set to true, the maximum sample number is 8192.
+List of available options of
+parameter: hwDecimation
+Option Description
+true Use burst site upload.
+false Do not use burst site
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+11,2,"Bug Detected at Line 2
+
+Incorrect Statement:
+rdi.dc().pin(""dig1"").vForce(1).iMeans().iRange(2 mAh).execute(); //
+
+Correct Statement:
+rdi.dc().pin(""dig1"").vForce(1).iMeas().iRange(2 mA).execute(); //
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+).iMeas          iMeas          ((TATA
+2222    
+2323          rdi        rdi..dcdc().().pinpin((""FVI16_PMU_1""""FVI16_PMU_1""))
+2424                                  ..vForce         vForce         ((0.00.0 V V))
+2525                                  ..execute        execute        ();();
+2626          }}
+2727      RDI_END    RDI_END();();
+2828    
+2929      rdi    rdi..dcdc().().pinpin((""FVI16_PMU_1""""FVI16_PMU_1"").).disconnectdisconnect().().executeexecute();();
+3030    
+3131  }}
+3232  ON_FIRST_IN
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."
+3,4,"Bug Detected at Line 4
+
+Incorrect Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(31 V).vForceRange(30 V).iForceRange(50 mA).iClamp(-50 mA, 50 mA)
+
+Correct Statement:
+            rdi.dc().pin(m_rMcd.sP_VS).vForce(30 V).vForceRange(30 V).iForceRange(50 mA).iClamp(-50 mA, 50 mA)
+
+Bug Category:
+Logic Mismatch
+
+Error Type:
+Logical Error
+
+Why This Is an Error:
+The logic differs from the correct implementation, causing incorrect output or incorrect computation.
+
+Impact:
+This issue may cause incorrect output, unexpected behavior,
+or program instability depending on execution flow.
+
+Technical Reference (Retrieved from Documentation):
+Sense only connection (open force), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 300
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force only connection (open sense), 100 Ω load connected (iForceRange = 300 mA)
+The voltage
+range is 0 to
+20 V, the
+clamp
+current is 100
+mA, the
+iForceRange
+is 300 mA,
+the force /
+return drop is
+±5 V and the
+compliance
+voltage is 30
+V.
+Force will drive to iClamp.
+
+
+How It Is Fixed:
+The corrected statement restores the intended logic
+and ensures the program behaves as expected."

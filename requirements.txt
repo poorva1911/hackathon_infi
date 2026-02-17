@@ -1,0 +1,8 @@
+fastmcp
+llama-index
+llama-index-embeddings-huggingface
+sentence-transformers
+transformers
+torch
+pandas
+streamlit
